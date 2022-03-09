@@ -5,8 +5,8 @@ import pandas as pd
 import uuid
 
 @click.command()
-@click.argument('new file')
-@click.argument('old file')
+@click.argument('new_file')
+@click.argument('old_file')
 def main(new_file, old_file):
     """Console script for ledger_diff."""
     index_cols = ["party", "venue", "account_name", "account_type", "asset"]
