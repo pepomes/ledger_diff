@@ -12,7 +12,7 @@ def main(new_file, old_file):
     index_cols = ["party", "venue", "account_name", "account_type", "asset"]
     df_new = pd.read_csv(new_file).set_index(index_cols)
     df_old = pd.read_csv(old_file).set_index(index_cols)
-    df_diff = df_new.join(df_old, how="outer", rsuffix="_old").assign(diff=lambda x: x.amount - x.amount_old)
+    df_diff = df_new.join(df_old, how="outer", rsuffix="_old").fillna(0).assign(diff=lambda x: x.amount - x.amount_old)
     df_diff.to_csv(f"diff_{dt.datetime.now().isoformat()}.csv")
     return 0
 
