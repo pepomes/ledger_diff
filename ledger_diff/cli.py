@@ -2,7 +2,7 @@
 import sys
 import click
 import pandas as pd
-import uuid
+import datetime as dt
 
 @click.command()
 @click.argument('new_file')
@@ -13,7 +13,7 @@ def main(new_file, old_file):
     df_new = pd.read_csv(new_file).set_index(index_cols)
     df_old = pd.read_csv(old_file).set_index(index_cols)
     df_diff = df_new.join(df_old, how="outer", rsuffix="_old").assign(diff=lambda x: x.amount - x.amount_old)
-    df_diff.to_csv(f"diff_{uuid.uuid4().int}.csv")
+    df_diff.to_csv(f"diff_{dt.datetime.now().isoformat()}.csv")
     return 0
 
 
